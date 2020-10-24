@@ -10,6 +10,7 @@ from psutil import cpu_count
 
 from utils import *
 
+from object_detection.utils import dataset_util, label_map_util
 
 def create_tf_example(filename, encoded_jpeg, annotations):
     """
@@ -25,6 +26,28 @@ def create_tf_example(filename, encoded_jpeg, annotations):
     """
 
     # TODO: Implement function to convert the data
+    encoded_jpg_io = io.BytesIO(encoded_jpg)
+    image = Image.open(encoded_jpg_io)
+    width, height = image.size
+    
+    image_format = b'jpg'
+    xmins = []
+    xmaxs = []
+    ymins = []
+    ymaxs = []
+    classes_text = []
+    classes = []
+
+    label_map = label_map_util.load_labelmap("label_map.pbtxt")
+    label_map_dict = label_map_util.get_label_map_dict(label_map)
+
+    for index, row in annotations.object.iterrows():
+        xmins.append(row['xmin'] / width)
+        xmaxs.append(row['xmax'] / width)
+        ymins.append(row['ymin'] / height)
+        ymaxs.append(row['ymax'] / height)
+        classes_text.append(row['class'].encode('utf8'))
+        classes.append(label_map_dict(row['class']))
 
     tf_example = tf.train.Example(features=tf.train.Features(feature={
         'image/height': int64_feature(height),

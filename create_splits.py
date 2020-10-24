@@ -18,6 +18,14 @@ def split(data_dir):
     """
     # TODO: Implement function
     
+    os.mkdir(data_dir+"/train")
+    os.mkdir(data_dir+"/val")
+    os.mkdir(data_dir+"/test")
+
+    filenames = random.shuffle(os.listdir(data_dir))
+    # names_train = filenames[:
+    # names_val = filenames[:
+    # names_test = filenames[:
 
 if __name__ == "__main__": 
     parser = argparse.ArgumentParser(description='Split data into training / validation / testing')
