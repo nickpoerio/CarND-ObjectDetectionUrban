@@ -26,7 +26,7 @@ def create_tf_example(filename, encoded_jpeg, annotations):
     """
 
     # TODO: Implement function to convert the data
-    encoded_jpg_io = io.BytesIO(encoded_jpg)
+    encoded_jpg_io = io.BytesIO(encoded_jpeg)
     image = Image.open(encoded_jpg_io)
     width, height = image.size
     
@@ -40,20 +40,22 @@ def create_tf_example(filename, encoded_jpeg, annotations):
 
     label_map = label_map_util.load_labelmap("label_map.pbtxt")
     label_map_dict = label_map_util.get_label_map_dict(label_map)
+    label_map_dict = dict(map(reversed, label_map_dict.items()))
 
-    for index, row in annotations.object.iterrows():
-        xmins.append(row['xmin'] / width)
-        xmaxs.append(row['xmax'] / width)
-        ymins.append(row['ymin'] / height)
-        ymaxs.append(row['ymax'] / height)
-        classes_text.append(row['class'].encode('utf8'))
-        classes.append(label_map_dict(row['class']))
+    for annotation in annotations:
+        
+        xmins.append((annotation.box.center_x - annotation.box.width / 2) / width)
+        xmaxs.append((annotation.box.center_x + annotation.box.width / 2) / width)
+        ymins.append((annotation.box.center_y - annotation.box.length / 2) / height)
+        ymaxs.append((annotation.box.center_y + annotation.box.length / 2) / height)
+        classes_text.append(label_map_dict[annotation.type].encode('utf8'))
+        classes.append(annotation.type)
 
     tf_example = tf.train.Example(features=tf.train.Features(feature={
         'image/height': int64_feature(height),
         'image/width': int64_feature(width),
-        'image/filename': bytes_feature(filename),
-        'image/source_id': bytes_feature(filename),
+        'image/filename': bytes_feature(filename.encode('utf8')),
+        'image/source_id': bytes_feature(filename.encode('utf8')),
         'image/encoded': bytes_feature(encoded_jpeg),
         'image/format': bytes_feature(image_format),
         'image/object/bbox/xmin': float_list_feature(xmins),
@@ -80,14 +82,12 @@ def download_tfr(filepath, temp_dir):
     # create data dir
     dest = os.path.join(temp_dir, 'raw')
     os.makedirs(dest, exist_ok=True)
-
     # download the tf record file
     cmd = ['gsutil', 'cp', filepath, f'{dest}']
     logger.info(f'Downloading {filepath}')
     res = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     if res.returncode != 0:
-        logger.error(f'Could not download file {filepath}') 
-    
+        logger.error(f'Could not download file {filepath}')
     filename = os.path.basename(filepath)
     local_path = os.path.join(dest, filename)
     return local_path
