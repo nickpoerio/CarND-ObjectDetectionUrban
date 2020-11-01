@@ -28,7 +28,7 @@ def create_tf_example(filename, encoded_jpeg, annotations):
     # TODO: Implement function to convert the data
     encoded_jpg_io = io.BytesIO(encoded_jpeg)
     image = Image.open(encoded_jpg_io)
-    width, height = image.size
+    height, width = image.size
     
     image_format = b'jpg'
     xmins = []
@@ -44,10 +44,10 @@ def create_tf_example(filename, encoded_jpeg, annotations):
 
     for annotation in annotations:
         
-        xmins.append((annotation.box.center_x - annotation.box.width / 2) / width)
-        xmaxs.append((annotation.box.center_x + annotation.box.width / 2) / width)
-        ymins.append((annotation.box.center_y - annotation.box.length / 2) / height)
-        ymaxs.append((annotation.box.center_y + annotation.box.length / 2) / height)
+        xmins.append((annotation.box.center_x - annotation.box.length / 2) / height)
+        xmaxs.append((annotation.box.center_x + annotation.box.length / 2) / height)
+        ymins.append((annotation.box.center_y - annotation.box.width / 2) / width)
+        ymaxs.append((annotation.box.center_y + annotation.box.width / 2) / width)
         classes_text.append(label_map_dict[annotation.type].encode('utf8'))
         classes.append(annotation.type)
 

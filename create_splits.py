@@ -18,14 +18,20 @@ def split(data_dir):
     """
     # TODO: Implement function
     
-    os.mkdir(data_dir+"/train")
-    os.mkdir(data_dir+"/val")
-    os.mkdir(data_dir+"/test")
+    os.makedirs(data_dir+"/train", exist_ok=True)
+    os.makedirs(data_dir+"/val", exist_ok=True)
+    os.makedirs(data_dir+"/test", exist_ok=True)
 
-    filenames = random.shuffle(os.listdir(data_dir))
-    # names_train = filenames[:
-    # names_val = filenames[:
-    # names_test = filenames[:
+    filenames = os.listdir(data_dir+"/processed/")
+
+    for i, filename in enumerate(filenames):
+        if i<90:
+            folder = 'train'
+        elif i<95:
+            folder = 'val'
+        else:
+            folder = 'test'
+        os.rename(data_dir+"/processed/"+filename, data_dir+"/"+folder+"/"+filename)
 
 if __name__ == "__main__": 
     parser = argparse.ArgumentParser(description='Split data into training / validation / testing')
