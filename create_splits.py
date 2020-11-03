@@ -23,11 +23,12 @@ def split(data_dir):
     os.makedirs(data_dir+"/test", exist_ok=True)
 
     filenames = os.listdir(data_dir+"/processed/")
+    random.shuffle(filenames)
 
     for i, filename in enumerate(filenames):
-        if i<90:
+        if i<70:
             folder = 'train'
-        elif i<95:
+        elif i<85:
             folder = 'val'
         else:
             folder = 'test'
