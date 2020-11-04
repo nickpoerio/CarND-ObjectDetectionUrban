@@ -17,14 +17,14 @@ The dataset includes 2D tags for three object classes:
 
 While vehicles and pedestrians are widely present, cyclists are way more rare.  
 Daylight, night and foggy images from U.S. urban scenarios are included.  
-For a visual exploration of the above mentioned, as well as a basic quantitative analysis see [here](Exploratory Data Analysis.ipynb).
+For a visual exploration of the above mentioned, as well as a basic quantitative analysis see [here]("Exploratory Data Analysis.ipynb").
 
 #### Cross validation
 The chosen dataset cardinality is quite limited, but still fit for fine tuning a model. In order to split it into training, validation and test trunches, I had to assure a minimum quantitative significance of the validation and test sets. I went for a 70-15-15 split:
 - it guarantees a minimum of about 3k frames for testing and validation
 - it guarantees a minimum occurrence of more rare scenarios like night, fog and presence of cyclists in all the sets  
 
-As there was no meta tagging, some trial and error split based on visual analysis has been necessary. This still refers to the above mentioned [notebook](Exploratory Data Analysis.ipynb).
+As there was no meta tagging, some trial and error split based on visual analysis has been necessary. This still refers to the above mentioned [notebook]("Exploratory Data Analysis.ipynb").
 
 ### Training 
 #### Reference experiment
