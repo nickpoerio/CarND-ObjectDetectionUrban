@@ -5,7 +5,7 @@ Perception is a crucial stack in the Automated Driving pipeline, the first pilla
 In order to safely drive, the environment must be perceived with high accuracy and traffic objects are certainly a big part of it.  
 Urban scenarios are particularly challenging in this sense, as traffic objects are very present, including vulnerable ones, like pedestrians or cyclists.  
 The front camera sensor is one of the main sources of information to build the traffic object detection stack: **deep learning models** are the state of art to accomplish this task.  
-For this project, I trained a **Single Shot Detector (SSD)** (paper [here](https://arxiv.org/pdf/1512.02325.pdf), baseline pretrained mode [here](http://download.tensorflow.org/models/object_detection/tf2/20200711/ssd_resnet50_v1_fpn_640x640_coco17_tpu-8.tar.gz)) using data from the [Waymo Open dataset](https://waymo.com/open/).
+For this project, I trained a **Single Shot Detector (SSD)** ([paper](https://arxiv.org/pdf/1512.02325.pdf), [baseline pretrained model](http://download.tensorflow.org/models/object_detection/tf2/20200711/ssd_resnet50_v1_fpn_640x640_coco17_tpu-8.tar.gz)) using data from the [Waymo Open dataset](https://waymo.com/open/).
 
 ### Dataset
 #### Dataset analysis
@@ -17,14 +17,14 @@ The dataset includes 2D tags for three object classes:
 
 While vehicles and pedestrians are widely present, cyclists are way more rare.  
 Daylight, night and foggy images from U.S. urban scenarios are included.  
-For a visual exploration of the above mentioned, as well as a basic quantitative analysis see [here]("Exploratory Data Analysis.ipynb").
+For a visual exploration of the above mentioned, as well as a basic quantitative analysis see [here](ExploratoryDataAnalysis.ipynb).
 
 #### Cross validation
 The chosen dataset cardinality is quite limited, but still fit for fine tuning a model. In order to split it into training, validation and test trunches, I had to assure a minimum quantitative significance of the validation and test sets. I went for a 70-15-15 split:
 - it guarantees a minimum of about 3k frames for testing and validation
 - it guarantees a minimum occurrence of more rare scenarios like night, fog and presence of cyclists in all the sets  
 
-As there was no meta tagging, some trial and error split based on visual analysis has been necessary. This still refers to the above mentioned [notebook]("Exploratory Data Analysis.ipynb").
+As there was no meta tagging, some trial and error split based on visual analysis has been necessary. This still refers to the above mentioned [notebook](ExploratoryDataAnalysis.ipynb).
 
 ### Training 
 #### Reference experiment
