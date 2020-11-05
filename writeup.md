@@ -18,7 +18,7 @@ The dataset includes 2D tags for three object classes:
 While vehicles and pedestrians are widely present, cyclists are way more rare.  
 Daylight, night and foggy images from U.S. urban scenarios are included.  
 
-![dataset_image](output/dataset_img.png)
+![dataset_image](outputs/dataset_img.png)
 
 For a visual exploration of the above mentioned, as well as a basic quantitative analysis see [here](Exploratory%20Data%20Analysis.ipynb) and [here](Exploratory%20Data%20Analysis%20cross_valid.ipynb)
 
