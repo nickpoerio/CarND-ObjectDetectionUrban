@@ -2,6 +2,7 @@ import argparse
 import time
 
 import matplotlib.pyplot as plt
+import matplotlib.animation as animation
 import numpy as np
 import tensorflow as tf
 
@@ -9,6 +10,7 @@ from object_detection.builders.dataset_builder import build as build_dataset
 from object_detection.utils.config_util import get_configs_from_pipeline_file
 from object_detection.utils.label_map_util import create_category_index_from_labelmap
 from object_detection.utils import visualization_utils as viz_utils
+from utils import get_module_logger
 
 
 def main(labelmap_path, model_path, tf_record_path, config_path, output_path):
