@@ -1,6 +1,5 @@
 /gcloud
-__pychache__/
+__pycache__/
 .ipynb_checkpoints/
 /training
-Exploratory_Data_Analysis_tmp.ipynb
 /data
