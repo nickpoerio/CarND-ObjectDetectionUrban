@@ -36,11 +36,7 @@ Tensorboard metrics show a clearly improving trend throughout the optimization p
 
 ![tensorboard](outputs/reference_tensorboard.png)
 
-An inference video was then generated using the `exporter_main_v2` utility.
-
-<video width="320" height="240" controls>
-  <source src="outputs/reference_animation.mp4" type="video/mp4">
-</video>
+An inference video `reference_animation.mp4` was then generated using the `exporter_main_v2` utility.
 
 #### Improve on the reference
 This section should highlight the different strategies you adopted to improve your model. It should contain relevant figures and details of your findings.
