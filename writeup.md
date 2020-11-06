@@ -36,9 +36,24 @@ Tensorboard metrics show a clearly improving trend throughout the optimization p
 
 ![tensorboard](outputs/reference_tensorboard.png)
 
-An inference video `reference_animation.mp4` was then generated using the `exporter_main_v2` utility.
+An inference video `outputs/reference_animation.mp4` was then generated using the `exporter_main_v2` utility.
 
 #### Improve on the reference
-This section should highlight the different strategies you adopted to improve your model. It should contain relevant figures and details of your findings.
+In order to improve the generalization performance of the object detector I experimented with artificial data augmentation.
+After a few test I decided to introduce 2 variations (see `pipeline_exp0.config`):
+
+- *random_brightness_adjust*
+- *random_contrast_adjust*
+
+I made my choice supported by tests executed in the following [notebook](Explore%20augmentations.ipynb)
+
+I then trained the model again.
+
+![tensorboard](outputs/exp0_tensorboard.png)
+
+A new inference video `outputs/exp0_animation.mp4` was then generated using the `exporter_main_v2` utility.
+
+Results are worse then expected: using augmentation affects optimization parameters, so a consequent parameters adjustment shoul be done. In addition, it is not trivial to choose augmentations that are meaninful to a given problem.
+
  
 
