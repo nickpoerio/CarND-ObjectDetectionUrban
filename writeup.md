@@ -51,7 +51,7 @@ I then trained the model again.
 
 ![tensorboard](outputs/exp0_tensorboard.png)
 
-A new inference video `outputs/exp0_animation.mp4` was then generated using the `exporter_main_v2` utility.
+A new inference video `outputs/experiment0_animation.mp4` was then generated using the `exporter_main_v2` utility.
 
 Results are worse then expected: using augmentation affects optimization parameters, so a consequent parameters adjustment shoul be done. In addition, it is not trivial to choose augmentations that are meaninful to a given problem.
 
